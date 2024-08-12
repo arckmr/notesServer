@@ -1,0 +1,236 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Notes API",
+      "version": "1.0.0",
+      "description": "A simple note-taking application API"
+    },
+    "paths": {
+      "/api/addNote": {
+        "post": {
+          "summary": "Create a new note",
+          "tags": ["Notes"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Test Note"
+                    },
+                    "body": {
+                      "type": "string",
+                      "example": "This is a test note."
+                    }
+                  },
+                  "required": ["title", "body"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Note created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "body": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          }
+        }
+      },
+      "/api/updateNote/{id}": {
+        "put": {
+          "summary": "Update an existing note by ID",
+          "tags": ["Notes"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "607d2f1f8f1b2c1a3d4e5f6f"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Updated Title"
+                    },
+                    "body": {
+                      "type": "string",
+                      "example": "Updated body."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Note updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "body": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Note not found"
+            },
+            "400": {
+              "description": "Bad request"
+            }
+          }
+        }
+      },
+      "/api/fetchNote/{id}": {
+        "get": {
+          "summary": "Fetch an existing note by ID",
+          "tags": ["Notes"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "607d2f1f8f1b2c1a3d4e5f6f"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Note fetched successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "body": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Note not found"
+            }
+          }
+        }
+      },
+      "/api/notes": {
+        "get": {
+          "summary": "Fetch notes by title substring",
+          "tags": ["Notes"],
+          "parameters": [
+            {
+              "name": "title",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "example": "First"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Notes fetched successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string"
+                        },
+                        "body": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

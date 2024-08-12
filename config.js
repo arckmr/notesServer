@@ -1,0 +1,1 @@
+exports.mongodbURI = "mongodb+srv://arckmr:Archit%4029@cluster0.snxr5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
